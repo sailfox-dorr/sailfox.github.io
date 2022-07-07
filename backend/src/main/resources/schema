@@ -1,0 +1,32 @@
+全唐诗
+        "title": "句",
+        "author": "李世民",
+        "biography": "",
+        "paragraphs": [
+            "雪恥酬百王，除凶報千古。",
+            "昔乘匹馬去，今驅萬乘來。",
+            "近日毛雖暖，聞弦心已驚。"
+        ],
+        "notes": [
+            ""
+        ],
+        "volume": "卷一",
+        "no#": 88,
+
+
+
+
+caocaoshiji
+
+    {
+        "title": "董逃歌词",
+        "paragraphs": [
+            "德行不亏缺，变故自难常。",
+            "郑康成行酒，伏地气绝；",
+            "郭景图命尽于园桑。"
+        ]
+    }
+
+
+
+match (a:Poet{name:'佚名'}) match (b:Poem{source:'诗经'}) create (a)-[:WRITE]->(b) create (b)-[:OWN_TO]->(a)

@@ -1,0 +1,28 @@
+logging:
+  level:
+    com.abcft.industrygraphbrowse.service: info
+  file:
+    name: "logs/service.log"
+
+server:
+  port: 18071
+  tomcat.uri-encoding: UTF-8
+
+spring:
+  data:
+    poems:
+      path: /Users/dorr/Desktop/neo4j-spring/data
+    neo4j:
+      database: neo4j
+  application:
+    name: dorr-service
+  profiles:
+    active: "@spring.profiles.active@"
+  mvc:
+    async:
+      request-timeout: 200000
+  neo4j:
+    uri: neo4j://localhost:7687
+    authentication:
+      username: neo4j
+      password: password
