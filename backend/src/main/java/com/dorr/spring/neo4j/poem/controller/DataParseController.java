@@ -3,6 +3,8 @@ package com.dorr.spring.neo4j.poem.controller;
 import com.dorr.spring.neo4j.common.aop.LogType;
 import com.dorr.spring.neo4j.common.entity.WebJsonInfo;
 import com.dorr.spring.neo4j.poem.service.DataParseService;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -16,10 +18,17 @@ import static com.dorr.spring.neo4j.common.entity.WebJsonInfo.success;
 public class DataParseController {
 
     private static HashMap<String, String> paths = new HashMap<>();
-    @Value("${spring.data.poems.path}")
-    private static String basePath;
 
-    static {
+    private String basePath;
+
+    // 数据中词是简体 ， 诗繁体
+
+    private final DataParseService service;
+
+    @Autowired
+    public DataParseController(DataParseService service, @Value("${spring.data.poems.path}") String basePath) {
+        this.service = service;
+        this.basePath = basePath;
         paths.put("诗经", basePath + "/shijing/shijing.json");
         paths.put("全唐诗", basePath + "/quan_tang_shi/json");
         paths.put("诗歌", basePath + "/json");
@@ -29,14 +38,7 @@ public class DataParseController {
         paths.put("论语", basePath + "/lunyu/lunyu.json");
         paths.put("元曲", basePath + "/yuanqu/yuanqu.json");
         paths.put("曹操", basePath + "/caocaoshiji/caocao.json");
-    }
 
-    // 数据中词是简体 ， 诗繁体
-
-    private final DataParseService service;
-
-    public DataParseController(DataParseService service) {
-        this.service = service;
     }
 
     @GetMapping("/parse/author")
